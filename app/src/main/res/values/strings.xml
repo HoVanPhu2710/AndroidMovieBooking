@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">AndroidMovieBooking</string>
+    <string name="featured_movies">Phim nổi bật</string>
+    <string name="movie_poster">Movie Poster</string>
+    <string name="sample_movie_title">Sample Movie Title</string>
+    <string name="sample_genre">Genre</string>
+
+</resources>
