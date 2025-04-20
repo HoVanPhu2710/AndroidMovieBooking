@@ -6,39 +6,69 @@ import com.google.gson.annotations.SerializedName;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RecommendMovie implements MovieListAdapter.MovieItem{
+public class RecommendMovie implements MovieListAdapter.MovieItem {
     @SerializedName("id")
     private int id;
+
     @SerializedName("title")
     private String title;
+
     @SerializedName("duration")
     private int duration;
+
     @SerializedName("releaseDate")
     private String releaseDate;
+
     @SerializedName("description")
     private String description;
+
     @SerializedName("director")
     private RecommendMovieDirector director;
+
     @SerializedName("trailerUrl")
     private String trailerUrl;
+
     @SerializedName("englishTitle")
     private String englishTitle;
+
     @SerializedName("isAvailable")
     private boolean isAvailable;
+
     @SerializedName("posterUrl")
     private String posterUrl;
+
     @SerializedName("rating")
     private float rating;
+
     @SerializedName("genres")
     private List<RecommendMovieGenre> genres;
+
     @SerializedName("slug")
     private String slug;
 
-    public String getTitle() {return title;}
-    public String getPosterUrl() {return posterUrl;}
-    public float getRating() {return rating;}
+    @Override
+    public int getId() {
+        return id;
+    }
+
+    @Override
+    public String getTitle() {
+        return title;
+    }
+
+    @Override
+    public String getPosterUrl() {
+        return posterUrl;
+    }
+
+    @Override
+    public float getRating() {
+        return rating;
+    }
+
+    @Override
     public List<String> getGenreNames() {
-        List<String> genreNames =  new ArrayList<>();
+        List<String> genreNames = new ArrayList<>();
         if (genres != null) {
             for (RecommendMovieGenre genre : genres) {
                 genreNames.add(genre.getName());
@@ -46,6 +76,36 @@ public class RecommendMovie implements MovieListAdapter.MovieItem{
         }
         return genreNames;
     }
+
+    public int getDuration() {
+        return duration;
+    }
+
+    public String getReleaseDate() {
+        return releaseDate;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public RecommendMovieDirector getDirector() {
+        return director;
+    }
+
+    public String getTrailerUrl() {
+        return trailerUrl;
+    }
+
+    public String getEnglishTitle() {
+        return englishTitle;
+    }
+
+    public boolean getIsAvailable() {
+        return isAvailable;
+    }
+
+    public String getSlug() {
+        return slug;
+    }
 }
-
-

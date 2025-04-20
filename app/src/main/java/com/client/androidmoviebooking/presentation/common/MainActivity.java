@@ -1,73 +1,68 @@
 package com.client.androidmoviebooking.presentation.common;
 
 import android.os.Bundle;
-
+import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.viewpager2.widget.ViewPager2;
-
+import androidx.navigation.NavController;
+import androidx.navigation.NavOptions;
+import androidx.navigation.fragment.NavHostFragment;
+import androidx.navigation.ui.NavigationUI;
 import com.client.androidmoviebooking.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ViewPager2 viewPager;
     private BottomNavigationView bottomNavigationView;
+    private NavController navController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Khởi tạo ViewPager2 và BottomNavigationView
-        viewPager = findViewById(R.id.view_pager);
+        // Khởi tạo BottomNavigationView
         bottomNavigationView = findViewById(R.id.bottom_navigation);
 
-        // Thiết lập Adapter cho ViewPager2
-        MainPagerAdapter pagerAdapter = new MainPagerAdapter(this);
-        viewPager.setAdapter(pagerAdapter);
+        // Khởi tạo NavController
+        NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.nav_host_fragment);
+        if (navHostFragment != null) {
+            navController = navHostFragment.getNavController();
+            // Đồng bộ BottomNavigationView với NavController
+            NavigationUI.setupWithNavController(bottomNavigationView, navController);
+        }
+    }
 
-        // Vô hiệu hóa vuốt ngang của ViewPager2
-        viewPager.setUserInputEnabled(false);
+    // Phương thức để ẩn BottomNavigationView
+    public void hideBottomNavigation() {
+        bottomNavigationView.setVisibility(View.GONE);
+    }
 
-        // Đồng bộ ViewPager2 với BottomNavigationView
-        bottomNavigationView.setOnItemSelectedListener(item -> {
-            int itemId = item.getItemId();
-            if (itemId == R.id.action_choose_movie) {
-                viewPager.setCurrentItem(0, false); // Không dùng animation
-                return true;
-            } else if (itemId == R.id.action_choose_theater) {
-                viewPager.setCurrentItem(1, false);
-                return true;
-            } else if (itemId == R.id.action_choose_food) {
-                viewPager.setCurrentItem(2, false);
-                return true;
-            } else if (itemId == R.id.action_profile) {
-                viewPager.setCurrentItem(3, false);
-                return true;
-            }
-            return false;
-        });
+    // Phương thức để hiển thị BottomNavigationView
+    public void showBottomNavigation() {
+        bottomNavigationView.setVisibility(View.VISIBLE);
+    }
 
-        // Đồng bộ BottomNavigationView khi ViewPager2 thay đổi trang
-        viewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
-            @Override
-            public void onPageSelected(int position) {
-                super.onPageSelected(position);
-                switch (position) {
-                    case 0:
-                        bottomNavigationView.setSelectedItemId(R.id.action_choose_movie);
-                        break;
-                    case 1:
-                        bottomNavigationView.setSelectedItemId(R.id.action_choose_theater);
-                        break;
-                    case 2:
-                        bottomNavigationView.setSelectedItemId(R.id.action_choose_food);
-                        break;
-                    case 3:
-                        bottomNavigationView.setSelectedItemId(R.id.action_profile);
-                        break;
-                }
-            }
-        });
+    @Override
+    public void onBackPressed() {
+        // Kiểm tra xem có thể quay lại fragment trước đó không
+        if (!navController.popBackStack()) {
+            // Nếu không còn fragment nào để quay lại, gọi super để kết thúc Activity
+            super.onBackPressed();
+        }
+    }
+
+    // Hàm để thêm animation khi chuyển giữa các fragment
+    // Hàm để thêm animation khi chuyển giữa các fragment
+    private void navigateWithAnimation() {
+        NavOptions navOptions = new NavOptions.Builder()
+                .setEnterAnim(R.anim.slide_in_left)    // Animation khi vào fragment (từ trái sang)
+                .setExitAnim(R.anim.slide_out_right)   // Animation khi rời khỏi fragment (ra phải)
+                .setPopEnterAnim(R.anim.slide_in_right) // Animation khi quay lại fragment (từ phải sang)
+                .setPopExitAnim(R.anim.slide_out_left)  // Animation khi quay lại (ra trái)
+                .build();
+
+        // Ví dụ: Điều hướng đến movieDetailFragment với animation
+        navController.navigate(R.id.action_movieListFragment_to_movieDetailFragment, null, navOptions);
     }
 }

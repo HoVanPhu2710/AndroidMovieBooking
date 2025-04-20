@@ -1,5 +1,6 @@
 package com.client.androidmoviebooking.presentation.movie.list;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,7 +25,40 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.Movi
     }
 
     public void setMovies(List<? extends MovieItem> items) {
-        this.items = new ArrayList<>(items != null ? items : new ArrayList<>());
+        this.items = new ArrayList<>();
+        if (items != null) {
+            for (MovieItem item : items) {
+                // Đảm bảo dữ liệu không null
+                String title = item.getTitle() != null ? item.getTitle() : "";
+                List<String> genres = item.getGenreNames() != null ? item.getGenreNames() : new ArrayList<>();
+                this.items.add(new MovieItem() {
+                    @Override
+                    public int getId() {
+                        return item.getId();
+                    }
+
+                    @Override
+                    public String getTitle() {
+                        return title;
+                    }
+
+                    @Override
+                    public String getPosterUrl() {
+                        return item.getPosterUrl();
+                    }
+
+                    @Override
+                    public float getRating() {
+                        return item.getRating();
+                    }
+
+                    @Override
+                    public List<String> getGenreNames() {
+                        return genres;
+                    }
+                });
+            }
+        }
         notifyDataSetChanged();
     }
 
@@ -39,7 +73,7 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.Movi
     @Override
     public void onBindViewHolder(@NonNull MovieViewHolder holder, int position) {
         if (items.isEmpty()) {
-            return; // Không bind nếu danh sách rỗng
+            return;
         }
         int index = enableInfiniteScroll ? position % items.size() : position;
         MovieItem item = items.get(index);
@@ -52,6 +86,7 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.Movi
     }
 
     public interface MovieItem {
+        int getId();
         String getTitle();
         String getPosterUrl();
         float getRating();
@@ -66,16 +101,35 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.Movi
 
         public MovieViewHolder(@NonNull View itemView) {
             super(itemView);
-            posterImageView = itemView.findViewById(R.id.iv_movie_poster);
-            titleTextView = itemView.findViewById(R.id.tv_movie_title);
-            genresTextView = itemView.findViewById(R.id.tv_genre);
+            posterImageView = itemView.findViewById(R.id.iv_movie_poster); // Sửa ID
+            titleTextView = itemView.findViewById(R.id.tv_movie_title); // Sửa ID
+            genresTextView = itemView.findViewById(R.id.tv_genre); // Sửa ID
             ratingTextView = itemView.findViewById(R.id.tv_rating);
+
+            // Debug: Kiểm tra view null
+            if (posterImageView == null) {
+                Log.e("MovieViewHolder", "posterImageView is null! Check if R.id.iv_movie_poster exists in movie_item.xml");
+            }
+            if (titleTextView == null) {
+                Log.e("MovieViewHolder", "titleTextView is null! Check if R.id.tv_movie_title exists in movie_item.xml");
+            }
+            if (genresTextView == null) {
+                Log.e("MovieViewHolder", "genresTextView is null! Check if R.id.tv_genre exists in movie_item.xml");
+            }
+            if (ratingTextView == null) {
+                Log.e("MovieViewHolder", "ratingTextView is null! Check if R.id.tv_rating exists in movie_item.xml");
+            }
         }
 
         public void bind(MovieItem item) {
-            titleTextView.setText(item.getTitle());
-            genresTextView.setText(String.join(", ", item.getGenreNames()));
-            ratingTextView.setText(String.format("%.1f", item.getRating()));
+            if (titleTextView == null || genresTextView == null || ratingTextView == null || posterImageView == null) {
+                Log.e("MovieViewHolder", "One or more views are null, skipping bind");
+                return;
+            }
+
+            titleTextView.setText(item.getTitle() != null ? item.getTitle() : "No Title");
+            genresTextView.setText(item.getGenreNames() != null ? String.join(", ", item.getGenreNames()) : "No Genres");
+            ratingTextView.setText(String.format("★ %.1f/10", item.getRating()));
             Glide.with(itemView.getContext())
                     .load(item.getPosterUrl())
                     .into(posterImageView);

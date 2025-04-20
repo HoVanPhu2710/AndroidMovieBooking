@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/movieListFragment">
+
+    <fragment
+        android:id="@+id/movieListFragment"
+        android:name="com.client.androidmoviebooking.presentation.movie.list.MovieListFragment">
+        <action
+            android:id="@+id/action_movieListFragment_to_movieDetailFragment"
+            app:destination="@id/movieDetailFragment"
+            app:popUpTo="@id/movieListFragment"
+            app:popUpToInclusive="false" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/theaterFragment"
+        android:name="com.client.androidmoviebooking.presentation.theater.TheaterFragment" />
+
+    <fragment
+        android:id="@+id/foodFragment"
+        android:name="com.client.androidmoviebooking.presentation.food.FoodFragment" />
+
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.client.androidmoviebooking.presentation.profile.ProfileFragment" />
+
+    <fragment
+        android:id="@+id/movieDetailFragment"
+        android:name="com.client.androidmoviebooking.presentation.movie.detail.MovieDetailFragment">
+        <argument
+            android:name="movieId"
+            app:argType="integer" />
+    </fragment>
+</navigation>
