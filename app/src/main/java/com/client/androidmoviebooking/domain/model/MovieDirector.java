@@ -7,4 +7,5 @@ public class MovieDirector {
     @SerializedName("name") private String name;
     @SerializedName("avatar") private String avatar;
     public String getName() { return name; }
+    public String getAvatar() {return avatar;}
 }

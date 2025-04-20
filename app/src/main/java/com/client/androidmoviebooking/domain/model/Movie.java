@@ -46,6 +46,9 @@ public class Movie implements MovieListAdapter.MovieItem {
     @SerializedName("slug")
     private String slug;
 
+    @SerializedName("casts")
+    private List<MovieCast> casts;
+
     @Override
     public int getId() {
         return id;
@@ -108,4 +111,6 @@ public class Movie implements MovieListAdapter.MovieItem {
     public String getSlug() {
         return slug;
     }
+
+    public List<MovieCast> getCasts() {return casts;}
 }

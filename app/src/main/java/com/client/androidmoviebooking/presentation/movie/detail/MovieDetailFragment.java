@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -13,16 +14,26 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.appcompat.widget.Toolbar;
+
 
 import com.bumptech.glide.Glide;
 import com.client.androidmoviebooking.App;
 import com.client.androidmoviebooking.R;
 import com.client.androidmoviebooking.di.ViewModelFactory;
 import com.client.androidmoviebooking.domain.model.Movie;
+import com.client.androidmoviebooking.domain.model.MovieCast;
+import com.client.androidmoviebooking.domain.model.PersonInMovie;
+import com.client.androidmoviebooking.domain.repository.CastItem;
+import com.client.androidmoviebooking.domain.repository.DirectorItem;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 import javax.inject.Inject;
@@ -30,9 +41,14 @@ import javax.inject.Inject;
 public class MovieDetailFragment extends Fragment {
     private static final String ARG_MOVIE_ID = "movie_id";
     private MovieDetailViewModel viewModel;
-    private TextView titleTextView, genresTextView, descriptionTextView, releaseDateTextView, durationTextView, directorTextView, ratingTextView;
+    private TextView titleTextView, genresTextView, descriptionTextView, releaseDateTextView, durationTextView, ratingTextView;
+    private RecyclerView directorCastRecyclerView;
     private ImageView posterImageView;
     private Button trailerButton, buyTicketButton;
+    private Toolbar detailToolbar;
+
+    private ImageButton closeButton;
+
 
     @Inject
     ViewModelFactory viewModelFactory;
@@ -56,11 +72,13 @@ public class MovieDetailFragment extends Fragment {
         descriptionTextView = view.findViewById(R.id.tv_description);
         releaseDateTextView = view.findViewById(R.id.tv_release_date);
         durationTextView = view.findViewById(R.id.tv_duration);
-        directorTextView = view.findViewById(R.id.tv_director);
+        directorCastRecyclerView = view.findViewById(R.id.rv_director_casts);
         ratingTextView = view.findViewById(R.id.tv_rating);
         posterImageView = view.findViewById(R.id.iv_poster);
         trailerButton = view.findViewById(R.id.btn_trailer);
         buyTicketButton = view.findViewById(R.id.btn_buy_ticket);
+        detailToolbar = view.findViewById(R.id.toolbar);
+        closeButton = view.findViewById(R.id.btnClose);
 
         return view;
     }
@@ -92,10 +110,8 @@ public class MovieDetailFragment extends Fragment {
                 titleTextView.setText(movie.getTitle());
                 genresTextView.setText(String.join(", ", movie.getGenreNames()));
                 descriptionTextView.setText(movie.getDescription());
-                directorTextView.setText(movie.getDirector().getName());
                 ratingTextView.setText(String.format("★ %.1f/10", movie.getRating()));
 
-                // Định dạng ngày khởi chiếu
                 try {
                     SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
                     SimpleDateFormat outputFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
@@ -105,30 +121,50 @@ public class MovieDetailFragment extends Fragment {
                     releaseDateTextView.setText(movie.getReleaseDate());
                 }
 
-                // Thời lượng
                 durationTextView.setText(String.format("%d phút", movie.getDuration()));
 
-                // Poster
                 Glide.with(this)
                         .load(movie.getPosterUrl())
                         .into(posterImageView);
 
-                // Nút Trailer
+                // Dữ liệu cho RecyclerView đạo diễn và diễn viên
+                List<PersonInMovie> items = new ArrayList<>();
+                if (movie.getDirector() != null) {
+                    items.add(new DirectorItem(movie.getDirector()));
+                }
+                if (movie.getCasts() != null) {
+                    for (MovieCast cast : movie.getCasts()) {
+                        items.add(new CastItem(cast));
+                    }
+                }
+
+                directorCastRecyclerView.setLayoutManager(new LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false));
+                directorCastRecyclerView.setAdapter(new DirectorCastAdapter(items));
+
                 trailerButton.setOnClickListener(v -> {
-                    // TODO: Mở trailerUrl bằng Intent hoặc WebView
+                    // TODO: Mở trailerUrl
                 });
 
-                // Nút Mua vé
                 buyTicketButton.setOnClickListener(v -> {
-                    // TODO: Xử lý mua vé
+                    // TODO: Mua vé
                 });
             }
         });
+
 
         // Quan sát lỗi
         viewModel.getError().observe(getViewLifecycleOwner(), error -> {
             // TODO: Hiển thị thông báo lỗi nếu cần
         });
+        detailToolbar.setNavigationOnClickListener(v -> {
+            requireActivity().onBackPressed(); // Gọi back truyền thống
+        });
+        closeButton.setOnClickListener(v -> {
+            requireActivity().finishAffinity(); // Đóng toàn bộ task, không chỉ Fragment hiện tại
+        });
+
+
+
     }
 
     @Override

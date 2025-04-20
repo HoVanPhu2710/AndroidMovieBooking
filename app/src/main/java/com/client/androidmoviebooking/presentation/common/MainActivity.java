@@ -52,17 +52,5 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    // Hàm để thêm animation khi chuyển giữa các fragment
-    // Hàm để thêm animation khi chuyển giữa các fragment
-//    private void navigateWithAnimation() {
-//        NavOptions navOptions = new NavOptions.Builder()
-//                .setEnterAnim(R.anim.slide_in_left)    // Animation khi vào fragment (từ trái sang)
-//                .setExitAnim(R.anim.slide_out_right)   // Animation khi rời khỏi fragment (ra phải)
-//                .setPopEnterAnim(R.anim.slide_in_right) // Animation khi quay lại fragment (từ phải sang)
-//                .setPopExitAnim(R.anim.slide_out_left)  // Animation khi quay lại (ra trái)
-//                .build();
-//
-//        // Ví dụ: Điều hướng đến movieDetailFragment với animation
-//        navController.navigate(R.id.action_movieListFragment_to_movieDetailFragment, null, navOptions);
-//    }
+
 }
