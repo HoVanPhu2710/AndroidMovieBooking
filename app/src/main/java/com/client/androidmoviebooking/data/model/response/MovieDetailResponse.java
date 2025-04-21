@@ -1,6 +1,6 @@
 package com.client.androidmoviebooking.data.model.response;
 
-import com.client.androidmoviebooking.domain.model.Movie;
+import com.client.androidmoviebooking.domain.model.MovieDetail;
 import com.google.gson.annotations.SerializedName;
 
 public class MovieDetailResponse {
@@ -11,7 +11,7 @@ public class MovieDetailResponse {
     private boolean success;
 
     @SerializedName("data")
-    private Movie data;
+    private DataWrapper data;
 
     @SerializedName("total")
     private int total;
@@ -22,6 +22,15 @@ public class MovieDetailResponse {
     @SerializedName("size")
     private int size;
 
+    public static class DataWrapper {
+        @SerializedName("data")
+        private MovieDetail data;
+
+        public MovieDetail getData() {
+            return data;
+        }
+    }
+
     public String getMessage() {
         return message;
     }
@@ -30,8 +39,8 @@ public class MovieDetailResponse {
         return success;
     }
 
-    public Movie getData() {
-        return data;
+    public MovieDetail getData() {
+        return data != null ? data.getData() : null;
     }
 
     public int getTotal() {

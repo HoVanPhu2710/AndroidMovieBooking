@@ -39,7 +39,7 @@ import java.util.Locale;
 import javax.inject.Inject;
 
 public class MovieDetailFragment extends Fragment {
-    private static final String ARG_MOVIE_ID = "movie_id";
+    private static final String ARG_MOVIE_SLUG = "movie_slug";
     private MovieDetailViewModel viewModel;
     private TextView titleTextView, genresTextView, descriptionTextView, releaseDateTextView, durationTextView, ratingTextView;
     private RecyclerView directorCastRecyclerView;
@@ -53,10 +53,10 @@ public class MovieDetailFragment extends Fragment {
     @Inject
     ViewModelFactory viewModelFactory;
 
-    public static MovieDetailFragment newInstance(int movieId) {
+    public static MovieDetailFragment newInstance(String movieSlug) {
         MovieDetailFragment fragment = new MovieDetailFragment();
         Bundle args = new Bundle();
-        args.putInt(ARG_MOVIE_ID, movieId);
+        args.putString(ARG_MOVIE_SLUG, movieSlug);
         fragment.setArguments(args);
         return fragment;
     }
@@ -98,43 +98,45 @@ public class MovieDetailFragment extends Fragment {
         viewModel = new ViewModelProvider(this, viewModelFactory).get(MovieDetailViewModel.class);
 
         // Lấy movieId từ arguments
-        int movieId = MovieDetailFragmentArgs.fromBundle(getArguments()).getMovieId();
-        Log.d("DEBUG", "Received movieId = " + movieId);
-        if (movieId != -1) {
-            viewModel.loadMovieDetail(movieId);
+        String movieSlug = String.valueOf(MovieDetailFragmentArgs.fromBundle(getArguments()).getMovieSlug());
+        Log.d("DEBUG", "Received movieSlug = " + movieSlug);
+        if (movieSlug != null) {
+            viewModel.loadMovieDetail(movieSlug);
+            Log.d("TAG", "ở đây à: ");
         }
 
         // Quan sát dữ liệu phim
-        viewModel.getMovie().observe(getViewLifecycleOwner(), movie -> {
-            if (movie != null) {
-                titleTextView.setText(movie.getTitle());
-                genresTextView.setText(String.join(", ", movie.getGenreNames()));
-                descriptionTextView.setText(movie.getDescription());
-                ratingTextView.setText(String.format("★ %.1f/10", movie.getRating()));
+        viewModel.getMovieDetail().observe(getViewLifecycleOwner(), movieDetail -> {
+            if (movieDetail != null) {
+                Log.d("TAG", "onViewCreated: ");
+                titleTextView.setText(movieDetail.getTitle());
+                genresTextView.setText(String.join(", ", movieDetail.getGenreNames()));
+                descriptionTextView.setText(movieDetail.getDescription());
+                ratingTextView.setText(String.format("★ %.1f/10", movieDetail.getRating()));
 
                 try {
                     SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
                     SimpleDateFormat outputFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
-                    Date date = inputFormat.parse(movie.getReleaseDate());
+                    Date date = inputFormat.parse(movieDetail.getReleaseDate());
                     releaseDateTextView.setText(outputFormat.format(date));
                 } catch (Exception e) {
-                    releaseDateTextView.setText(movie.getReleaseDate());
+                    releaseDateTextView.setText(movieDetail.getReleaseDate());
                 }
 
-                durationTextView.setText(String.format("%d phút", movie.getDuration()));
+                durationTextView.setText(String.format("%d phút", movieDetail.getDuration()));
 
                 Glide.with(this)
-                        .load(movie.getPosterUrl())
+                        .load(movieDetail.getPosterUrl())
                         .into(posterImageView);
 
                 // Dữ liệu cho RecyclerView đạo diễn và diễn viên
                 List<PersonInMovie> items = new ArrayList<>();
-                if (movie.getDirector() != null) {
-                    items.add(new DirectorItem(movie.getDirector()));
+                if (movieDetail.getDirector() != null) {
+                    items.add(new DirectorItem(movieDetail.getDirector()));
                 }
-                if (movie.getCasts() != null) {
-                    for (MovieCast cast : movie.getCasts()) {
-                        items.add(new CastItem(cast));
+                if (movieDetail.getMovieCasts() != null) {
+                    for (MovieCast movieCast : movieDetail.getMovieCasts()) {
+                        items.add(new CastItem(movieCast));
                     }
                 }
 

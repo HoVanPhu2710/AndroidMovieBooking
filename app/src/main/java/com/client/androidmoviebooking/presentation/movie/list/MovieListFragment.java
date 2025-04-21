@@ -95,6 +95,11 @@ public class MovieListFragment extends Fragment {
         genreAdapter = new GenreMovieAdapter(this::navigateToMovieDetail);
         binding.rvGenreMovies.setAdapter(genreAdapter);
 
+        // Xử lý nút btn_back để tắt ứng dụng
+        binding.btnClose.setOnClickListener(v -> {
+            requireActivity().finishAffinity(); // Đóng toàn bộ ứng dụng
+        });
+
         // Quan sát dữ liệu từ ViewModel
         viewModel.getPopularMovies().observe(getViewLifecycleOwner(), movies -> {
             if (movies != null && !movies.isEmpty()) {
@@ -187,7 +192,7 @@ public class MovieListFragment extends Fragment {
     }
 
     private void navigateToMovieDetail(MovieListAdapter.MovieItem movieItem) {
-        NavDirections action = MovieListFragmentDirections.actionMovieListFragmentToMovieDetailFragment(movieItem.getId());
+        NavDirections action = MovieListFragmentDirections.actionMovieListFragmentToMovieDetailFragment(movieItem.getSlug());
         Navigation.findNavController(binding.getRoot()).navigate(action);
     }
 

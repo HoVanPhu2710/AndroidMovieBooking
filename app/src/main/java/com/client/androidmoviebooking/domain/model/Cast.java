@@ -2,7 +2,7 @@ package com.client.androidmoviebooking.domain.model;
 
 import com.google.gson.annotations.SerializedName;
 
-public class RecommendMovieDirector {
+public class Cast {
     @SerializedName("id")
     private int id;
     @SerializedName("name")
@@ -10,5 +10,15 @@ public class RecommendMovieDirector {
     @SerializedName("avatar")
     private String avatar;
 
-    public String getName() {return name;}
+    public int getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
 }

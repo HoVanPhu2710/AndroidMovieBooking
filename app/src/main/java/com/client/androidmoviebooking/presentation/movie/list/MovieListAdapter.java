@@ -56,6 +56,11 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.Movi
                     public List<String> getGenreNames() {
                         return genres;
                     }
+
+                    @Override
+                    public String getSlug() {
+                        return item.getSlug();
+                    }
                 });
             }
         }
@@ -91,6 +96,8 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.Movi
         String getPosterUrl();
         float getRating();
         List<String> getGenreNames();
+
+        String getSlug();
     }
 
     class MovieViewHolder extends RecyclerView.ViewHolder {

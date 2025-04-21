@@ -10,7 +10,7 @@
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#FFC0CB">
+        android:background="#FFCCE5">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"

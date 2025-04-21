@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.client.androidmoviebooking.R;
+import com.client.androidmoviebooking.domain.model.Cast;
 import com.client.androidmoviebooking.domain.model.MovieCast;
 import com.client.androidmoviebooking.domain.model.MovieDirector;
 import com.client.androidmoviebooking.domain.model.PersonInMovie;
@@ -24,6 +25,12 @@ public class DirectorCastAdapter extends RecyclerView.Adapter<DirectorCastAdapte
 
     public DirectorCastAdapter(List<PersonInMovie> items) {
         this.items = items;
+    }
+
+    public void updateData(List<PersonInMovie> newItems) {
+        this.items.clear();
+        this.items.addAll(newItems);
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -44,14 +51,25 @@ public class DirectorCastAdapter extends RecyclerView.Adapter<DirectorCastAdapte
             holder.roleTextView.setText("Đạo diễn");
             Glide.with(holder.photoImageView.getContext())
                     .load(director.getAvatar())
+                    .placeholder(R.drawable.placeholder_image)
                     .into(holder.photoImageView);
         } else if (item.getViewType() == 1) { // Cast
-            MovieCast cast = ((CastItem) item).getCast();
-            holder.nameTextView.setText(cast.getName());
-            holder.roleTextView.setText("Diễn viên");
-            Glide.with(holder.photoImageView.getContext())
-                    .load(cast.getAvatarUrl())
-                    .into(holder.photoImageView);
+            MovieCast movieCast = ((CastItem) item).getCast();
+            Cast cast = movieCast.getCast(); // Sửa: Loại bỏ ép kiểu
+            if (cast != null) {
+                holder.nameTextView.setText(cast.getName());
+                holder.roleTextView.setText("Diễn viên: " + movieCast.getCharacterName());
+                Glide.with(holder.photoImageView.getContext())
+                        .load(cast.getAvatar())
+                        .placeholder(R.drawable.placeholder_image)
+                        .into(holder.photoImageView);
+            } else {
+                holder.nameTextView.setText("Unknown");
+                holder.roleTextView.setText("Diễn viên: " + movieCast.getCharacterName());
+                Glide.with(holder.photoImageView.getContext())
+                        .load(R.drawable.placeholder_image)
+                        .into(holder.photoImageView);
+            }
         }
     }
 
@@ -72,4 +90,3 @@ public class DirectorCastAdapter extends RecyclerView.Adapter<DirectorCastAdapte
         }
     }
 }
-

@@ -16,6 +16,6 @@ public interface ApiService {
     Call<MovieResponse> getMovies();
     @GET("movies/recommended")
     Call<RecommendMovieResponse> getRecommendedMovies();
-    @GET("movies/detail/{id}")
-    Call<MovieDetailResponse> getMovieDetail(@Path("id") int id);
+    @GET("movies/{slug}")
+    Call<MovieDetailResponse> getMovieDetail(@Path("slug") String slug);
 }
