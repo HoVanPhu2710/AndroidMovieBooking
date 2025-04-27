@@ -1,4 +1,4 @@
-package com.client.androidmoviebooking.domain.model;
+package com.client.androidmoviebooking.domain.model.movie;
 
 import com.client.androidmoviebooking.presentation.movie.list.MovieListAdapter;
 import com.google.gson.annotations.SerializedName;
@@ -6,12 +6,15 @@ import com.google.gson.annotations.SerializedName;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RecommendMovie implements MovieListAdapter.MovieItem {
+public class MovieDetail implements MovieListAdapter.MovieItem {
     @SerializedName("id")
     private int id;
 
     @SerializedName("title")
     private String title;
+
+    @SerializedName("englishTitle")
+    private String englishTitle;
 
     @SerializedName("duration")
     private int duration;
@@ -28,23 +31,26 @@ public class RecommendMovie implements MovieListAdapter.MovieItem {
     @SerializedName("trailerUrl")
     private String trailerUrl;
 
-    @SerializedName("englishTitle")
-    private String englishTitle;
-
-    @SerializedName("isAvailable")
-    private boolean isAvailable;
-
     @SerializedName("posterUrl")
     private String posterUrl;
 
     @SerializedName("rating")
     private float rating;
 
+    @SerializedName("slug")
+    private String slug;
+
+    @SerializedName("isAvailable")
+    private boolean isAvailable;
+
     @SerializedName("genres")
     private List<MovieGenre> genres;
 
-    @SerializedName("slug")
-    private String slug;
+    @SerializedName("showtimes")
+    private List<Showtime> showtimes;
+
+    @SerializedName("movieCasts")
+    private List<MovieCast> movieCasts;
 
     @Override
     public int getId() {
@@ -89,9 +95,7 @@ public class RecommendMovie implements MovieListAdapter.MovieItem {
         return description;
     }
 
-    public MovieDirector getDirector() {
-        return director;
-    }
+    public MovieDirector getDirector() { return director;}
 
     public String getTrailerUrl() {
         return trailerUrl;
@@ -108,4 +112,6 @@ public class RecommendMovie implements MovieListAdapter.MovieItem {
     public String getSlug() {
         return slug;
     }
+
+    public List<MovieCast> getMovieCasts() { return movieCasts;}
 }

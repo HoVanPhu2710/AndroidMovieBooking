@@ -1,7 +1,7 @@
 package com.client.androidmoviebooking.domain.repository;
 
-import com.client.androidmoviebooking.domain.model.MovieDirector;
-import com.client.androidmoviebooking.domain.model.PersonInMovie;
+import com.client.androidmoviebooking.domain.model.movie.MovieDirector;
+import com.client.androidmoviebooking.domain.model.movie.PersonInMovie;
 
 public class DirectorItem implements PersonInMovie {
     private final MovieDirector director;

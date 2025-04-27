@@ -1,4 +1,4 @@
-package com.client.androidmoviebooking.domain.model;
+package com.client.androidmoviebooking.domain.model.movie;
 
 import com.client.androidmoviebooking.presentation.movie.list.MovieListAdapter;
 import com.google.gson.annotations.SerializedName;
@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Movie implements MovieListAdapter.MovieItem {
+public class RecommendMovie implements MovieListAdapter.MovieItem {
     @SerializedName("id")
     private int id;
 
@@ -45,9 +45,6 @@ public class Movie implements MovieListAdapter.MovieItem {
 
     @SerializedName("slug")
     private String slug;
-
-    @SerializedName("casts")
-    private List<MovieCast> casts;
 
     @Override
     public int getId() {
@@ -111,6 +108,4 @@ public class Movie implements MovieListAdapter.MovieItem {
     public String getSlug() {
         return slug;
     }
-
-    public List<MovieCast> getCasts() {return casts;}
 }

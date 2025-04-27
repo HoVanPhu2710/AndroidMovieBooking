@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="8dp">
+
+    <FrameLayout
+        android:id="@+id/logo_container"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:background="@drawable/brand_background">
+
+        <ImageView
+            android:id="@+id/brand_logo"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_star" />
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/brand_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="Đề xuất"
+        android:textColor="#000000"
+        android:textSize="14sp" />
+
+</LinearLayout>

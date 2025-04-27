@@ -1,6 +1,6 @@
 package com.client.androidmoviebooking.data.model.response;
 
-import com.client.androidmoviebooking.domain.model.MovieDetail;
+import com.client.androidmoviebooking.domain.model.movie.MovieDetail;
 import com.google.gson.annotations.SerializedName;
 
 public class MovieDetailResponse {

@@ -1,10 +1,7 @@
 package com.client.androidmoviebooking.domain.repository;
 
-import com.client.androidmoviebooking.domain.model.Cast;
-import com.client.androidmoviebooking.domain.model.MovieCast;
-import com.client.androidmoviebooking.domain.model.PersonInMovie;
-
-import java.util.List;
+import com.client.androidmoviebooking.domain.model.movie.MovieCast;
+import com.client.androidmoviebooking.domain.model.movie.PersonInMovie;
 
 public class CastItem implements PersonInMovie {
     private final MovieCast movieCast;

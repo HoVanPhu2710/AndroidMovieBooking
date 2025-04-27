@@ -11,10 +11,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.client.androidmoviebooking.R;
-import com.client.androidmoviebooking.domain.model.Cast;
-import com.client.androidmoviebooking.domain.model.MovieCast;
-import com.client.androidmoviebooking.domain.model.MovieDirector;
-import com.client.androidmoviebooking.domain.model.PersonInMovie;
+import com.client.androidmoviebooking.domain.model.movie.Cast;
+import com.client.androidmoviebooking.domain.model.movie.MovieCast;
+import com.client.androidmoviebooking.domain.model.movie.MovieDirector;
+import com.client.androidmoviebooking.domain.model.movie.PersonInMovie;
 import com.client.androidmoviebooking.domain.repository.CastItem;
 import com.client.androidmoviebooking.domain.repository.DirectorItem;
 

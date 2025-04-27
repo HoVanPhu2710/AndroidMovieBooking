@@ -4,8 +4,7 @@ import android.util.Log;
 
 import com.client.androidmoviebooking.data.api.ApiService;
 import com.client.androidmoviebooking.data.model.response.MovieDetailResponse;
-import com.client.androidmoviebooking.domain.model.Movie;
-import com.client.androidmoviebooking.domain.model.MovieDetail;
+import com.client.androidmoviebooking.domain.model.movie.MovieDetail;
 
 import javax.inject.Inject;
 

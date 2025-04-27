@@ -4,5 +4,21 @@
     <string name="movie_poster">Movie Poster</string>
     <string name="sample_movie_title">Sample Movie Title</string>
     <string name="sample_genre">Genre</string>
-
+    <string name="choose_theater">Chọn theo rạp</string>
+    <string name="support">Hỗ trợ</string>
+    <string name="close">Đóng</string>
+    <string name="search_theater">Tìm rạp phim…</string>
+    <string name="hcm_city">TP.HCM</string>
+    <string name="suggested">Đề xuất</string>
+    <string name="suggested_theaters">Rạp đề xuất</string>
+    <string name="default_count">(5)</string>
+    <string name="nearby_theater">Bạn ở gần rạp này</string>
+    <string name="recently_selected">Bạn vừa chọn rạp này</string>
+    <string name="find_directions">Tìm đường</string>
+    <string name="favorite">Yêu thích</string>
+    <string name="details">Chi tiết</string>
+    <string name="theater_logo">Logo rạp</string>
+    <string name="brand_logo">Logo thương hiệu</string>
+    <string name="search_icon">Biểu tượng tìm kiếm</string>
+    <string name="select_city">Chọn thành phố</string>
 </resources>

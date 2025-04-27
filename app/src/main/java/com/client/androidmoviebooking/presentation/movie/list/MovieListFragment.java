@@ -17,11 +17,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.SnapHelper;
 
 import com.client.androidmoviebooking.App;
-import com.client.androidmoviebooking.R;
 import com.client.androidmoviebooking.di.ViewModelFactory;
-import com.client.androidmoviebooking.domain.model.Movie;
-import com.client.androidmoviebooking.domain.model.RecommendMovie;
-import com.client.androidmoviebooking.databinding.FragmentMovieListBinding;
+import com.client.androidmoviebooking.databinding.FragmentMovieBinding;
 import com.client.androidmoviebooking.presentation.layoutmanager.CenterZoomLayoutManager;
 
 import java.util.ArrayList;
@@ -30,7 +27,7 @@ import java.util.HashMap;
 import javax.inject.Inject;
 
 public class MovieListFragment extends Fragment {
-    private FragmentMovieListBinding binding;
+    private FragmentMovieBinding binding;
     private MovieListAdapter popularAdapter;
     private GenreMovieAdapter genreAdapter;
     private MovieListViewModel viewModel;
@@ -46,7 +43,7 @@ public class MovieListFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        binding = FragmentMovieListBinding.inflate(inflater, container, false);
+        binding = FragmentMovieBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
 

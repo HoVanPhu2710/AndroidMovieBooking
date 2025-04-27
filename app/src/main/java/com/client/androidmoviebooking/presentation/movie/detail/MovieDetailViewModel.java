@@ -6,8 +6,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.client.androidmoviebooking.domain.model.Movie;
-import com.client.androidmoviebooking.domain.model.MovieDetail;
+import com.client.androidmoviebooking.domain.model.movie.MovieDetail;
 import com.client.androidmoviebooking.domain.usecase.GetMovieDetailUseCase;
 
 import javax.inject.Inject;

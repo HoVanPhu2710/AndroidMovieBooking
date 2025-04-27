@@ -4,8 +4,8 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.client.androidmoviebooking.domain.model.Movie;
-import com.client.androidmoviebooking.domain.model.RecommendMovie;
+import com.client.androidmoviebooking.domain.model.movie.Movie;
+import com.client.androidmoviebooking.domain.model.movie.RecommendMovie;
 import com.client.androidmoviebooking.domain.usecase.GetMovieListUseCase;
 import com.client.androidmoviebooking.domain.usecase.GetRecommendedMovieListUseCase;
 

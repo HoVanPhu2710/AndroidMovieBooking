@@ -1,6 +1,6 @@
 package com.client.androidmoviebooking.presentation.movie.detail;
 
-import com.client.androidmoviebooking.domain.model.PersonInMovie;
+import com.client.androidmoviebooking.domain.model.movie.PersonInMovie;
 
 public class DirectorCastItem implements PersonInMovie {
     private String name;
