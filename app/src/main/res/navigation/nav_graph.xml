@@ -20,7 +20,7 @@
 
     <fragment
         android:id="@+id/theaterFragment"
-        android:name="com.client.androidmoviebooking.presentation.theater.TheaterFragment" />
+        android:name="com.client.androidmoviebooking.presentation.theater.TheaterBrand.TheaterFragment" />
 
     <fragment
         android:id="@+id/foodFragment"

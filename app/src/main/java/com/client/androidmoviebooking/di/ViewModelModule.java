@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.client.androidmoviebooking.presentation.movie.detail.MovieDetailViewModel;
 import com.client.androidmoviebooking.presentation.movie.list.MovieListViewModel;
+import com.client.androidmoviebooking.presentation.theater.TheaterBrand.TheaterViewModel;
 
 import dagger.Binds;
 import dagger.Module;
@@ -21,6 +22,11 @@ public abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(MovieDetailViewModel.class)
     abstract ViewModel bindMovieDetailViewModel(MovieDetailViewModel viewModel);
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(TheaterViewModel.class)
+    abstract ViewModel bindTheaterViewModel(TheaterViewModel viewModel);
 
     @Binds
     abstract ViewModelProvider.Factory bindViewModelFactory(ViewModelFactory factory);

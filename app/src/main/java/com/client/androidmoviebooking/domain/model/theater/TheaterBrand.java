@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 public class TheaterBrand {
     @SerializedName("id")
-    private int id;
+    private Integer id;
     @SerializedName("name")
     private String name;
     @SerializedName("logo")
