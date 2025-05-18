@@ -2,9 +2,11 @@ package com.client.androidmoviebooking.di;
 
 import com.client.androidmoviebooking.data.api.ApiService;
 import com.client.androidmoviebooking.domain.usecase.GetCityUseCase;
+import com.client.androidmoviebooking.domain.usecase.GetDateTimeUseCase;
 import com.client.androidmoviebooking.domain.usecase.GetMovieListUseCase;
 import com.client.androidmoviebooking.domain.usecase.GetRecommendedMovieListUseCase;
 import com.client.androidmoviebooking.domain.usecase.GetTheaterBrandUseCase;
+import com.client.androidmoviebooking.domain.usecase.GetTheaterMoviesUseCase;
 import com.client.androidmoviebooking.domain.usecase.GetTheaterRecommendUseCase;
 import com.client.androidmoviebooking.domain.usecase.GetTheaterUseCase;
 
@@ -48,5 +50,17 @@ public class RepositoryModule {
     @Singleton
     GetTheaterRecommendUseCase provideGetTheaterRecommendUseCase(ApiService apiService) {
         return new GetTheaterRecommendUseCase(apiService);
+    }
+
+    @Provides
+    @Singleton
+    GetDateTimeUseCase provideGetDateTimeUseCase(ApiService apiService) {
+        return new GetDateTimeUseCase(apiService);
+    }
+
+    @Provides
+    @Singleton
+    GetTheaterMoviesUseCase provideGetTheaterMoviesUseCase(ApiService apiService) {
+        return new GetTheaterMoviesUseCase(apiService);
     }
 }

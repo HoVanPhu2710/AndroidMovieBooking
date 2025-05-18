@@ -205,11 +205,9 @@ public class TheaterFragment extends Fragment {
     private void setupTheaterList() {
         theaterList = new ArrayList<>();
         theaterAdapter = new TheaterAdapter(theaterList, theaterId -> {
-//            Toast.makeText(getContext(), "Đã chọn: " + theaterId, Toast.LENGTH_SHORT).show();
-//            // TODO: Navigate to theater detail
-//        }, favoriteId -> {
-//            Toast.makeText(getContext, "Đã thêm vào yêu thích", Toast.LENGTH_SHORT).show();
-//            // TODO: Implement toggleFavorite in ViewModel
+            // Navigate to TheaterDetailFragment
+            Navigation.findNavController(requireView())
+                    .navigate(TheaterFragmentDirections.actionTheaterFragmentToTheaterDetailFragment(theaterId));
         });
         theaterRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         theaterRecyclerView.setAdapter(theaterAdapter);

@@ -1,5 +1,6 @@
 package com.client.androidmoviebooking.domain.model.movie;
 
+import com.client.androidmoviebooking.domain.model.theater.Showtime;
 import com.client.androidmoviebooking.presentation.movie.list.MovieListAdapter;
 import com.google.gson.annotations.SerializedName;
 

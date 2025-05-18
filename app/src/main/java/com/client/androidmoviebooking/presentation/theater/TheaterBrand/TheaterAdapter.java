@@ -18,7 +18,7 @@ import java.util.List;
 public class TheaterAdapter extends RecyclerView.Adapter<TheaterAdapter.TheaterViewHolder> {
 
     private List<Theater> theaterList;
-    private OnTheaterClickListener theaterClickListener;
+        private OnTheaterClickListener theaterClickListener;
 
     public interface OnTheaterClickListener {
         void onTheaterClick(int theaterId);
