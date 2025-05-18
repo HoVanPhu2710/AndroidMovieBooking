@@ -46,6 +46,13 @@
         <argument
             android:name="movieSlug"
             app:argType="string" />
+        <action
+            android:id="@+id/action_movieDetailFragment_to_trailerFragment"
+            app:destination="@id/trailerFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
 
     <fragment
@@ -54,5 +61,20 @@
         <argument
             android:name="theaterId"
             app:argType="integer" />
+        <action
+            android:id="@+id/action_theaterDetailFragment_to_trailerFragment"
+            app:destination="@id/trailerFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/trailerFragment"
+        android:name="com.client.androidmoviebooking.presentation.common.TrailerFragment">
+        <argument
+            android:name="trailerUrl"
+            app:argType="string" />
     </fragment>
 </navigation>

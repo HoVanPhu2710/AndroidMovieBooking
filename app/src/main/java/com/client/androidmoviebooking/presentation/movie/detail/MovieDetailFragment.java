@@ -9,11 +9,14 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.appcompat.widget.Toolbar;
@@ -143,7 +146,16 @@ public class MovieDetailFragment extends Fragment {
                 directorCastRecyclerView.setAdapter(new DirectorCastAdapter(items));
 
                 trailerButton.setOnClickListener(v -> {
-                    // TODO: Mở trailerUrl
+                    String trailerUrl = movieDetail.getTrailerUrl();
+                    if (trailerUrl != null && !trailerUrl.isEmpty()) {
+                        Bundle bundle = new Bundle();
+                        bundle.putString("trailerUrl", trailerUrl);
+                        NavController navController = NavHostFragment.findNavController(this);
+                        navController.navigate(R.id.action_movieDetailFragment_to_trailerFragment, bundle);
+                    } else {
+                        Log.e("MovieDetailFragment", "Trailer URL is null or empty");
+                        Toast.makeText(requireContext(), "Không có trailer khả dụng", Toast.LENGTH_SHORT).show();
+                    }
                 });
 
                 buyTicketButton.setOnClickListener(v -> {
