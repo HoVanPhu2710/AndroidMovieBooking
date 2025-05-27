@@ -2,9 +2,9 @@
 <androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="140dp"
+    android:layout_width="180dp"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp"
+    android:layout_margin="12dp"
     app:cardCornerRadius="8dp"
     app:cardElevation="4dp">
 
@@ -17,15 +17,19 @@
         <ImageView
             android:id="@+id/iv_movie_poster"
             android:layout_width="match_parent"
-            android:layout_height="180dp"
+            android:layout_height="240dp"
             android:scaleType="centerCrop"
             android:contentDescription="@string/movie_poster" />
 
+        <!-- Rating -->
         <TextView
             android:id="@+id/tv_rating"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"/>
+            android:layout_gravity="center_horizontal"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="4dp"
+            android:textSize="12sp" />
 
         <!-- Tên phim -->
         <TextView
@@ -35,8 +39,10 @@
             android:layout_marginTop="4dp"
             android:padding="4dp"
             android:textStyle="bold"
-            android:textSize="14sp"
+            android:textSize="16sp"
             android:textColor="@android:color/black"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center_horizontal"
             android:maxLines="1"
             android:ellipsize="end" />
 
@@ -49,7 +55,9 @@
             android:padding="4dp"
             android:textSize="12sp"
             android:textColor="@android:color/darker_gray"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center_horizontal"
             android:maxLines="1"
-            android:ellipsize="end" />
+            android:ellipsize="end"/>
     </LinearLayout>
 </androidx.cardview.widget.CardView>

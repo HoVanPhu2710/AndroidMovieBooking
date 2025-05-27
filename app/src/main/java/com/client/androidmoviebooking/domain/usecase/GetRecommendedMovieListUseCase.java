@@ -2,7 +2,7 @@ package com.client.androidmoviebooking.domain.usecase;
 
 import com.client.androidmoviebooking.data.api.ApiService;
 import com.client.androidmoviebooking.data.model.response.RecommendMovieResponse;
-import com.client.androidmoviebooking.domain.model.RecommendMovie;
+import com.client.androidmoviebooking.domain.model.movie.RecommendMovie;
 
 import java.util.List;
 import java.util.Map;

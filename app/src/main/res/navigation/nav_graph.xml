@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/movieListFragment">
+
+    <fragment
+        android:id="@+id/movieListFragment"
+        android:name="com.client.androidmoviebooking.presentation.movie.list.MovieListFragment">
+        <action
+            android:id="@+id/action_movieListFragment_to_movieDetailFragment"
+            app:destination="@id/movieDetailFragment"
+            app:popUpTo="@id/movieListFragment"
+            app:popUpToInclusive="false"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/theaterFragment"
+        android:name="com.client.androidmoviebooking.presentation.theater.TheaterBrand.TheaterFragment">
+        <action
+            android:id="@+id/action_theaterFragment_to_theaterDetailFragment"
+            app:destination="@id/theaterDetailFragment"
+            app:popUpTo="@id/theaterFragment"
+            app:popUpToInclusive="false"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/foodFragment"
+        android:name="com.client.androidmoviebooking.presentation.food.FoodFragment" />
+
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.client.androidmoviebooking.presentation.profile.ProfileFragment" />
+
+    <fragment
+        android:id="@+id/movieDetailFragment"
+        android:name="com.client.androidmoviebooking.presentation.movie.detail.MovieDetailFragment">
+        <argument
+            android:name="movieSlug"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_movieDetailFragment_to_trailerFragment"
+            app:destination="@id/trailerFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/theaterDetailFragment"
+        android:name="com.client.androidmoviebooking.presentation.theater.TheaterDetail.TheaterDetailFragment">
+        <argument
+            android:name="theaterId"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_theaterDetailFragment_to_trailerFragment"
+            app:destination="@id/trailerFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/trailerFragment"
+        android:name="com.client.androidmoviebooking.presentation.common.TrailerFragment">
+        <argument
+            android:name="trailerUrl"
+            app:argType="string" />
+    </fragment>
+</navigation>

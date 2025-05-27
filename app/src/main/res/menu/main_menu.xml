@@ -1,19 +1,18 @@
-<?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/action_choose_movie"
+        android:id="@+id/movieListFragment"
         android:title="Chọn phim"
-        android:icon="@drawable/ic_movie"/>
+        android:icon="@drawable/ic_movie" />
     <item
-        android:id="@+id/action_choose_theater"
+        android:id="@+id/theaterFragment"
         android:title="Chọn rạp"
-        android:icon="@drawable/ic_theater"/>
+        android:icon="@drawable/ic_theater" />
     <item
-        android:id="@+id/action_choose_food"
+        android:id="@+id/foodFragment"
         android:title="Bắp nước"
-        android:icon="@drawable/ic_food"/>
+        android:icon="@drawable/ic_food" />
     <item
-        android:id="@+id/action_profile"
+        android:id="@+id/profileFragment"
         android:title="Tôi"
-        android:icon="@drawable/ic_profile"/>
+        android:icon="@drawable/ic_profile" />
 </menu>

@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.client.androidmoviebooking.R;
-import com.client.androidmoviebooking.domain.model.RecommendMovie;
+import com.client.androidmoviebooking.domain.model.movie.RecommendMovie;
 
 import java.util.ArrayList;
 import java.util.List;

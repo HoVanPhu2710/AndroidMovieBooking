@@ -1,4 +1,4 @@
-package com.client.androidmoviebooking.domain.model;
+package com.client.androidmoviebooking.domain.model.movie;
 
 import com.google.gson.annotations.SerializedName;
 

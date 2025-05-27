@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.android.application)
+    alias(libs.plugins.navigation.safeargs)  // Sử dụng alias từ libs.versions.toml
 }
 
 android {
@@ -29,10 +30,12 @@ android {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
+    buildFeatures {
+        viewBinding = true
+    }
 }
 
 dependencies {
-
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)
@@ -50,4 +53,8 @@ dependencies {
     implementation(libs.glide)
     annotationProcessor(libs.glideCompiler)
 
+    implementation(libs.navigation.fragment)
+    implementation(libs.navigation.ui)
+    implementation(libs.okhttp.logging)
+    implementation(libs.youtubeplayer)
 }

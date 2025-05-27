@@ -1,73 +1,61 @@
 package com.client.androidmoviebooking.presentation.common;
 
 import android.os.Bundle;
-
+import android.util.Log;
+import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.viewpager2.widget.ViewPager2;
-
+import androidx.navigation.NavController;
+import androidx.navigation.fragment.NavHostFragment;
+import androidx.navigation.ui.NavigationUI;
 import com.client.androidmoviebooking.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ViewPager2 viewPager;
     private BottomNavigationView bottomNavigationView;
+    private NavController navController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Khởi tạo ViewPager2 và BottomNavigationView
-        viewPager = findViewById(R.id.view_pager);
+        // Khởi tạo BottomNavigationView
         bottomNavigationView = findViewById(R.id.bottom_navigation);
+        if (bottomNavigationView == null) {
+            Log.e("MainActivity", "BottomNavigationView not found in layout!");
+        }
 
-        // Thiết lập Adapter cho ViewPager2
-        MainPagerAdapter pagerAdapter = new MainPagerAdapter(this);
-        viewPager.setAdapter(pagerAdapter);
+        // Khởi tạo NavController
+        NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.nav_host_fragment);
+        if (navHostFragment != null) {
+            navController = navHostFragment.getNavController();
+            Log.d("MainActivity", "NavController initialized");
+            // Đồng bộ BottomNavigationView với NavController
+            NavigationUI.setupWithNavController(bottomNavigationView, navController);
 
-        // Vô hiệu hóa vuốt ngang của ViewPager2
-        viewPager.setUserInputEnabled(false);
-
-        // Đồng bộ ViewPager2 với BottomNavigationView
-        bottomNavigationView.setOnItemSelectedListener(item -> {
-            int itemId = item.getItemId();
-            if (itemId == R.id.action_choose_movie) {
-                viewPager.setCurrentItem(0, false); // Không dùng animation
-                return true;
-            } else if (itemId == R.id.action_choose_theater) {
-                viewPager.setCurrentItem(1, false);
-                return true;
-            } else if (itemId == R.id.action_choose_food) {
-                viewPager.setCurrentItem(2, false);
-                return true;
-            } else if (itemId == R.id.action_profile) {
-                viewPager.setCurrentItem(3, false);
-                return true;
-            }
-            return false;
-        });
-
-        // Đồng bộ BottomNavigationView khi ViewPager2 thay đổi trang
-        viewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
-            @Override
-            public void onPageSelected(int position) {
-                super.onPageSelected(position);
-                switch (position) {
-                    case 0:
-                        bottomNavigationView.setSelectedItemId(R.id.action_choose_movie);
-                        break;
-                    case 1:
-                        bottomNavigationView.setSelectedItemId(R.id.action_choose_theater);
-                        break;
-                    case 2:
-                        bottomNavigationView.setSelectedItemId(R.id.action_choose_food);
-                        break;
-                    case 3:
-                        bottomNavigationView.setSelectedItemId(R.id.action_profile);
-                        break;
+            // Lắng nghe thay đổi destination
+            navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
+                int destinationId = destination.getId();
+                Log.d("MainActivity", "Destination changed to: " + destination.getLabel() + " (ID: " + destinationId + ")");
+                if (destinationId == R.id.movieDetailFragment|| destinationId == R.id.action_movieDetailFragment_to_trailerFragment || destinationId == R.id.trailerFragment || destinationId == R.id.theaterDetailFragment) {
+                    bottomNavigationView.setVisibility(View.GONE);
+                    Log.d("MainActivity", "Hiding BottomNavigationView for destination: " + destination.getLabel());
+                } else {
+                    bottomNavigationView.setVisibility(View.VISIBLE);
+                    Log.d("MainActivity", "Showing BottomNavigationView for destination: " + destination.getLabel());
                 }
-            }
-        });
+            });
+        } else {
+            Log.e("MainActivity", "NavHostFragment not found!");
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (!navController.popBackStack()) {
+            super.onBackPressed();
+        }
     }
 }
